@@ -57,26 +57,15 @@ function App() {
 
     setHomes(homes)
 
-  }
-
   //Interaction with Connect Metamask button
+  // Account Change function
+  window.ethereum.on('accountsChanged', async () => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const account = ethers.utils.getAddress(accounts[0])
+    setAccount(account);
+  })
 
-  useEffect(() => {
-    window.ethereum.on("accountsChanged", handleAccountChange);
-    return () => {
-      window.ethereum.removeListener("accountsChanged", handleAccountChange);
-    };
-  });
-
-  const handleAccountChange = (...args) => {
-    console.log(args)
-    const accounts = args[0] ;
-    if (accounts.length === 0) {
-      console.log("Please connect to metamask");
-    } else if (accounts[0] !== account) {
-      setAccount(accounts[0])
-    }
-  };
+}
 
   useEffect(() => {
     loadBlockchainData()
@@ -86,7 +75,6 @@ function App() {
     setHome(home)
     toggle ? setToggle(false) : setToggle(true);
   }
-
 
   return (
     <div>
@@ -107,7 +95,7 @@ function App() {
                 <img src={home.image} alt="Home" />
               </div>
               <div className='card__info'>
-                <p>{home.name}</p>
+                <p className='card__info__title'>{home.name}</p>
                 <h4>{home.attributes[0].value} ETH</h4>
                 <p>
                   <strong>{home.attributes[2].value}</strong> bds |
