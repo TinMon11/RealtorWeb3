@@ -1,0 +1,33 @@
+{
+    "name": "MESSI Big House",
+    "address": "1986 Soccer Street, Barcelona, SP 98282",
+    "description": "Comfy island home on Spain",
+    "image": "https://ipfs.io/ipfs/QmchzhUmG5JtjeSETZAYBdquaACeXZc59wKWNBpCkx5DqJ/3.jpg",
+    "id": "3",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 10
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Single family residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 5
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 10
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 3500
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2020
+        }
+    ]
+}
