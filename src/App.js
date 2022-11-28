@@ -35,12 +35,11 @@ function App() {
     ethSigner = provider.getSigner()
 
     //conecting RealEstate Contract.
-    const RealEstateInstance = new ethers.Contract(realEstateAddress, RealEstateABI, ethSigner)
+    const RealEstateInstance = new ethers.Contract(realEstateAddress, RealEstateABI, provider)
     const totalSupply = await RealEstateInstance.totalSupply();
-    console.log(totalSupply.toNumber())
     const homes = [] //storage of housing/nfts
 
-    const escrowInstance = new ethers.Contract(escrowAddress, EscrowABI, ethSigner)
+    const escrowInstance = new ethers.Contract(escrowAddress, EscrowABI, provider)
     setEscrow(escrowInstance)
 
     for (var i = 1; i <= totalSupply; i++) {
@@ -51,21 +50,21 @@ function App() {
           Accept: "application/json"
         },
       }).then((res) => res.json())
-      
+
       homes.push(response)
     }
 
     setHomes(homes)
 
-  //Interaction with Connect Metamask button
-  // Account Change function
-  window.ethereum.on('accountsChanged', async () => {
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const account = ethers.utils.getAddress(accounts[0])
-    setAccount(account);
-  })
+    //Interaction with Connect Metamask button
+    // Account Change function
+    window.ethereum.on('accountsChanged', async () => {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const account = ethers.utils.getAddress(accounts[0])
+      setAccount(account);
+    })
 
-}
+  }
 
   useEffect(() => {
     loadBlockchainData()

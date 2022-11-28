@@ -16,15 +16,12 @@ const Home = ({ home, provider, account, escrow, togglePop }) => {
 
     const [owner, setOwner] = useState(null)
 
-    console.log(account)
-
     const fetchDetails = async () => {
         // -- Buyer
         //call different solidty functions from escrow with its home ID
 
         const buyer = await escrow.buyer(home.id)
-        setBuyer(buyer)
-        console.log("Buyer: " + buyer) // Test Account 1 en mi metamask (....2266)
+        setBuyer(buyer) // Test Account 1 en mi metamask (....2266)
 
         const hasBought = await escrow.approval(home.id, buyer)
         setHasBought(hasBought)
@@ -32,8 +29,7 @@ const Home = ({ home, provider, account, escrow, togglePop }) => {
         // -- Seller
 
         const seller = await escrow.seller();
-        console.log("Seller: " + seller) // Test Account 2 en mi metamask (....79c98)
-        setSeller(seller)
+        setSeller(seller)// Test Account 2 en mi metamask (....79c98)
 
         const hasSold = await escrow.approval(home.id, seller)
         setHasSold(hasSold)
@@ -41,8 +37,7 @@ const Home = ({ home, provider, account, escrow, togglePop }) => {
         // -- Lender
 
         const lender = await escrow.lender();
-        console.log("Lender: " + lender) // Test Account 3 en mi metamask (....b906)
-        setLender(lender)
+        setLender(lender)// Test Account 3 en mi metamask (....b906)
 
         const hasLended = await escrow.approval(home.id, lender)
         setHasLended(hasLended)
@@ -50,8 +45,8 @@ const Home = ({ home, provider, account, escrow, togglePop }) => {
         // -- Inspector
 
         const inspector = await escrow.inspector();
-        console.log("Inspect: " + inspector) // Test Account 0 en mi metamask (....293bc)
-        setInspector(inspector)
+        setInspector(inspector)// Test Account 0 en mi metamask (....293bc)
+        
         const hasInspected = await escrow.inspectionPassed(home.id)
         setHasInspected(hasInspected)
     }
